@@ -20,9 +20,8 @@ app.get('/',(req,res) => {
     res.send('Hello to Memories API');
 })
 // const CONNECTION_URL = 'mongodb+srv://sanjuli_trivedi:UvARTZe9N9w32dW@cluster0.9dtm2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
-app.listen(process.env.PORT || 5000, function(){
-    console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
-  });
+const PORT = process.env.PORT || 5000;
+
 mongoose.connect(process.env.CONNECTION_URL, {useNewUrlParser: true , useUnifiedTopology: true})
 .then (() => app.listen(PORT, () => console.log(`server running on port: ${PORT}`)))
 .catch((error) => console.log(error.message));
