@@ -1,4 +1,4 @@
-import express, { Router } from 'express';
+import express from 'express';
 
 import { getPosts, createPost, updatePost, deletePost , likePost} from '../controllers/posts.js';
 
