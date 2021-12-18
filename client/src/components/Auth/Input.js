@@ -28,4 +28,4 @@ const Input = ({half, name, handleChange, label, autoFocus, handleShowPassword, 
     )
 }
 
-export default Input
+export default Input;
