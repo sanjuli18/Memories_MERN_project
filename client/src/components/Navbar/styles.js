@@ -13,8 +13,7 @@ export default makeStyles((theme) => ({
   },
   heading: {
     color: 'rgba(255, 94, 105, 0.8)',
-    textDecoration: 'italic',
-   // fontStyle: 'italic',
+    fontStyle: 'italic',
     //fontWeight: 'bold',
 
   },
