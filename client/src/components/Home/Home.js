@@ -6,7 +6,7 @@ import Form from "../Form/Form"
 import Posts from "../Posts/Posts";
 import Pagination from '../Pagination/Pagination';
 import {useDispatch} from 'react-redux';
-import {getPosts} from '../../actions/posts';
+import {getPosts, getPostsBySearch} from '../../actions/posts';
 import {useState,useEffect} from "react";
 import { mergeClasses } from "@material-ui/styles";
 import useStyles from './styles.js';
@@ -34,8 +34,9 @@ const Home = () =>{
 
 
     const searchPost = () => {
-        if(search.trim()) {
-            //dispatch -> fetch search post
+        if(search.trim() || tags) {
+           dispatch(getPostsBySearch({ search, tags: tags.join (',')}));
+           history.push(`/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(',')}`);
         }
         else{
             history.push('/');
@@ -64,7 +65,7 @@ const Home = () =>{
                     </Grid>
                     <Grid item xs={12} sm={6} md={3} >
                         <AppBar className={classes.appBarSearch} position="static" color="inherit">
-                            <TextField name="search" variant="outlined" label="Search Memories" onKeyPress={handleKeyPress} fullWidth value={search} onChange= {(e)=> setSearch(e.target.value)} />
+                        <TextField onKeyDown={handleKeyPress} name="search" variant="outlined" label="Search Memories" fullWidth value={search} onChange={(e) => setSearch(e.target.value)} />
                         <ChipInput 
                             style={{margin: '10px 0'}}
                             value={tags}
