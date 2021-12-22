@@ -1,10 +1,10 @@
 import * as api from '../api/index.js';
 import { FETCH_ALL, UPDATE, DELETE, LIKE, CREATE, FETCH_BY_SEARCH } from '../constants/actionTypes.js';
 //Action Creators
-export const getPosts = () => async (dispatch) => {
+export const getPosts = (page) => async (dispatch) => {
 
     try {
-        const { data } = await api.fetchPosts();
+        const { data } = await api.fetchPosts(page);
         dispatch({ type: FETCH_ALL , payload: data});
     } catch (error) {
         console.log(error.message);
@@ -22,21 +22,25 @@ export const getPostsBySearch = (searchQuery) => async (dispatch) => {
     }
 };
 
-export const createPost = (post) => async(dispatch) => {
+export const createPost = (post, history) => async (dispatch) => {
     try {
-        const {data} = await api.createPost(post);
-        dispatch({type: CREATE, payload: data});
+      //dispatch({ type: START_LOADING });
+      const { data } = await api.createPost(post);
+  
+      dispatch({ type: CREATE, payload: data });
+  
+      history.push(`/posts/${data._id}`);
     } catch (error) {
-        console.log(error.message);   
+      console.log(error);
     }
-};
+  };
 
 export const updatePost = (id, post) => async(dispatch) => {
     try {
      const {data} =  await api.updatePost(id,post);
      dispatch({type: UPDATE, payload: data});
     } catch (error) {
-        console.log(error.message);
+        console.log(error);
     }
 };
 
