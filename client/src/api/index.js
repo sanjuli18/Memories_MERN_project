@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API = axios.create({baseURL: 'https://memories-livid.vercel.app/posts'});
+const API = axios.create({baseURL: 'https://memories-livid.vercel.app/'});
 
 //const url = 'https://memoriesss-app.herokuapp.com/posts';
 
